@@ -212,6 +212,25 @@
         <module>gameoflife-web</module>
     </modules>
     <profiles>
+      <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.host.url>http://ec2-18-215-240-221.compute-1.amazonaws.com:9000/</sonar.host.url>
+     <sonar-maven-plugin.version>3.3.0.603</sonar-maven-plugin.version>
+            </properties>
+            <build>
+              <plugins>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-maven-plugin.version}</version>
+                </plugin>
+              </plugins>
+            </build>
+        </profile>
         <profile>
             <id>development</id>
             <activation>
@@ -222,6 +241,18 @@
         <profile>
             <id>metrics</id>
             <build>
+     <distributionManagement>
+	    <repository>
+	      <id>nexus</id>
+	      <name>devopsproject</name>
+	      <url>http://ec2-35-173-49-126.compute-1.amazonaws.com:8081/repository/devopsproject/</url>
+	    </repository>
+	    <snapshotRepository>
+	      <id>nexus</id>
+	      <name>devopsproj </name>
+	      <url>http://ec2-35-173-49-126.compute-1.amazonaws.com:8081/repository/devopsproj/</url>
+	    </snapshotRepository>
+	</distributionManagement>
                 <plugins>
                     <!-- CHECKSTYLE -->
                     <!--<plugin>-->
@@ -238,7 +269,7 @@
                             <!--<configLocation>custom-checkstyle.xml</configLocation>-->
                         <!--</configuration>-->
                     <!--</plugin>-->
-
+  
                     <!-- PMD -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
